@@ -10,16 +10,13 @@
  *   Created by Ryan Danver 3/22/20
  */
 
-// One tick is executed per frame.
-final int TICKS_PER_SECOND = 60;
-
 // Amount of ticks it takes until sick agent recovers.
 final int SICK_TICKS = 500;
 
-// Other agent properties
+// This value is multiplied with the force value of each agent.
 final float SPEED = 1;
-final int DIAMETER = 8;
 
+final int diameter = 8;
 color healthyColor = color(150, 150, 150);
 color sickColor = color(255, 100, 100);
 color recoveredColor = color(100, 255, 100);
@@ -36,7 +33,6 @@ Table data;
 void setup() {
   size(1000, 600);
   background(255);
-  frameRate(TICKS_PER_SECOND);
   infoX = 10;
   infoY = height/2;
   ticks = 0;
@@ -154,7 +150,7 @@ void updateField() {
 void addToField(int amount, int stat) {
   int added = 0;
   while (added < amount) {
-    PVector pos = new PVector(random(L_Field + DIAMETER, width-DIAMETER), random(DIAMETER, height-DIAMETER));
+    PVector pos = new PVector(random(L_Field + diameter, width-diameter), random(diameter, height-diameter));
     boolean filled = false;
     for (Person p : agents)
       if (p.checkCollision(pos)) filled = true;
@@ -195,7 +191,7 @@ class Person {
     this.stat = stat;
     this.force = force;
     this.quarantine = quarantine;
-    d = DIAMETER;
+    d = diameter;
     r = d / 2;
   }
 
